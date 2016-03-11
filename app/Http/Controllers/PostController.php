@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['create', 'edit']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +22,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = new Post;
-        $list = $posts->all();
+        $list = Post::paginate(10);
 
         return view('posts.index', compact('list'));
 
