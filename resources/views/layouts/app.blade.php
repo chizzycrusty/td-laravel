@@ -18,6 +18,8 @@
     <style>
         body {
             font-family: 'Lato';
+            background-image: url('../chaton.jpg');
+            background-size: cover;
         }
 
         .fa-btn {

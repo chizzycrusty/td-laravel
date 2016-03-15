@@ -33,5 +33,10 @@ Route::group(['middleware' => 'web'], function () {
 	});
 	
 	Route::resource('/post', 'PostController');
+
+	Route::get('/admin', function() {
+		return 'admin';
+	})->middleware('isadmin');
+
 });
 

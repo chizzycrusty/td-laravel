@@ -29,11 +29,15 @@
                                     ]) 
                                 !!}
                             </div>
+                        
+                    </div>
+                    <div class="panel-footer">
                         {!! Form::submit('Publier l\'article',
                             ['class' => 'btn btn-primary'])
                         !!}
 
                         {!! Form::close() !!}
+                        <a class="btn btn-default" href="{{ route('post.index') }}">Retour aux articles</a>
                     </div>
                 </div>
             </div>

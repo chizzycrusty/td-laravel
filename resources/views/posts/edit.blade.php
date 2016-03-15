@@ -15,6 +15,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Ajouter un article</div>
                     <div class="panel-body">
+
+                    @if(Auth::check()
+                    && (Auth::user()->id == $post->user_id
+                    || Auth::user()->isAdmin))
+
                         {!! Form::model($post,
                             array(
                             'route' => array('post.update', $post->id),
@@ -37,11 +42,22 @@
                                     ]) 
                                 !!}
                             </div>
+                        
+                    </div>
+                    <div class="panel-footer">
                         {!! Form::submit('Publier l\'article',
                             ['class' => 'btn btn-primary'])
                         !!}
 
                         {!! Form::close() !!}
+
+                        @else
+                        
+                        <p>Vous n'avez pas les droits nécessaires</p>
+
+                        @endif
+
+                        <a class="btn btn-default" href="{{ route('post.index') }}">Retour aux articles</a>
                     </div>
                 </div>
             </div>
