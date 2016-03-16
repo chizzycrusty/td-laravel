@@ -13,7 +13,7 @@
         @endif
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Ajouter un article</div>
+                <div class="panel-heading">Editer un article</div>
                     <div class="panel-body">
 
                     @if(Auth::check()

@@ -38,5 +38,7 @@ Route::group(['middleware' => 'web'], function () {
 		return 'admin';
 	})->middleware('isadmin');
 
+	Route::resource('/comment', 'CommentController');
+
 });
 

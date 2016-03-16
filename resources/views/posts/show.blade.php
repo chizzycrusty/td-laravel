@@ -38,12 +38,59 @@
                 <div class="panel-body">
                     <h3>Commentaires</h3>
 
+                    <div class="panel-body">
+                        {!! Form::open(array(
+                            'route' => 'comment.store',
+                            'method' => 'POST'
+                            ))
+                        !!}
+                            {!! Form::hidden('post_id', $post->id, ['class'=>'form-control']) !!}
+
+                            <div class="form-group">
+                                {!! Form::label('Comment', 'Écrire un commentaire') !!}
+                                {!! Form::textarea('comment', '', 
+                                    ['class' => 'form-control']) 
+                                !!}
+                            </div>
+                        
+                        {!! Form::submit('Publier le commentaire',
+                            ['class' => 'btn btn-primary'])
+                        !!}
+
+                        {!! Form::close() !!}
+
+                        <br>
+                    </div>
+
                     @foreach($post->comments as $comment)
                         <p>
                             <strong>{{ $comment->user->name }}</strong>
                             <br>
                             {{ $comment->comment }}
                         </p>
+
+                        @if(Auth::check()
+                        && (Auth::user()->id == $comment->user_id
+                        || Auth::user()->isAdmin))
+
+                            {!! Form::model($comment, array(
+                                'route' => array('comment.destroy', $comment->id),
+                                'method' => 'DELETE')) 
+                            !!}
+
+                            {!! Form::submit('Supprimer', ['class' => 'btn btn-default']) !!}
+
+                            
+                            
+                        
+                            <a class="btn btn-default" href="{{ route('comment.edit', $comment->id) }}">Modifier le commentaire</a>
+                        
+                        @endif
+
+                        {!! Form::close() !!}
+
+                        <br>
+
                     @endforeach
 
                 </div>

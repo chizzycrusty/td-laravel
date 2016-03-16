@@ -57,7 +57,7 @@ class PostController extends Controller
         $input['user_id'] = Auth::user() -> id;
         $post -> fill($input) -> save();
 
-        return redirect() -> route('post.index');
+        return redirect() -> route('post.show');
     }
 
     /**

@@ -13,39 +13,29 @@
         @endif
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Ajouter un article</div>
+                <div class="panel-heading">Editer un commentaire</div>
                     <div class="panel-body">
 
                     @if(Auth::check()
-                    && (Auth::user()->id == $post->user_id
+                    && (Auth::user()->id == $comment->user_id
                     || Auth::user()->isAdmin))
 
-                        {!! Form::model($post,
+                        {!! Form::model($comment,
                             array(
-                            'route' => array('post.update', $post->id),
+                            'route' => array('comment.update', $comment->id),
                             'method' => 'PUT'
                             ))
                         !!}
                             <div class="form-group">
-                                {!! Form::label('title', 'Titre') !!}
-                                {!! Form::text('title', old('title'), 
-                                    ['class' => 'form-control',
-                                    'placeholder' => 'Mon titre'
-                                    ]) 
-                                !!}
-                            </div>
-                            <div class="form-group">
-                                {!! Form::label('content', 'Contenu') !!}
-                                {!! Form::textarea('content', old('content'), 
-                                    ['class' => 'form-control',
-                                    'placeholder' => 'Contenu'
-                                    ]) 
+                                {!! Form::label('Comment', 'Modifier un commentaire') !!}
+                                {!! Form::textarea('comment', old('comment'), 
+                                    ['class' => 'form-control']) 
                                 !!}
                             </div>
                         
                     </div>
                     <div class="panel-footer">
-                        {!! Form::submit('Publier l\'article',
+                        {!! Form::submit('Publier le commentaire',
                             ['class' => 'btn btn-primary'])
                         !!}
 

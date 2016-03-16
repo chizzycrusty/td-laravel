@@ -53,7 +53,7 @@ class CommentController extends Controller
         $input['user_id'] = Auth::user() -> id;
         $comment -> fill($input) -> save();
 
-        return redirect() -> route('post.show');
+        return redirect() -> route('post.show', $comment->post_id);
     }
 
     /**
@@ -77,8 +77,8 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::findOrFail($id);
-        return view('comments.edit', compact('post'));
+        $comment = Comment::findOrFail($id);
+        return view('comments.edit', compact('comment'));
     }
 
     /**
@@ -98,7 +98,7 @@ class CommentController extends Controller
         $input = $request->input();
         $comment->fill($input)->save();
 
-        return redirect() -> route('post.show') -> with('success', 'Votre commentaire a bien été modifié');
+        return redirect() -> route('post.show', $comment->post_id) -> with('success', 'Votre commentaire a bien été modifié');
     }
 
     /**
@@ -112,6 +112,6 @@ class CommentController extends Controller
         $comment = Comment::findOrFail($id);
         $comment->delete();
 
-        return redirect() -> route('post.show') -> with('success', 'Votre commentaire a bien été supprimé');
+        return redirect() -> route('post.show', $comment->post_id) -> with('success', 'Votre commentaire a bien été supprimé');
     }
 }
