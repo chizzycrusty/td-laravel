@@ -54,6 +54,7 @@
                     @if(Auth::check())
                     <li><a href="{{ route('post.create') }}">Rédiger un article</a></li>
                     @endif
+                    <li><a href="{{ route('contact.create') }}">Contact</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
