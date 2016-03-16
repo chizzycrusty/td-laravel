@@ -28,3 +28,4 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Posts');
     }
 }
+ini_set('xdebug.max_nesting_level', 200); 
