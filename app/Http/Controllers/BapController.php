@@ -13,7 +13,7 @@ class BapController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->only(['edit']);
+        $this->middleware('auth')->only(['index', 'show']);
     }
     /**
      * Display a listing of the resource.
@@ -22,7 +22,9 @@ class BapController extends Controller
      */
     public function index()
     {
-        //
+        $list = Bap::orderBy('created_at', 'desc')->paginate(10);
+
+        return view('bap.index', compact('list'));
     }
 
     /**
@@ -78,7 +80,9 @@ class BapController extends Controller
      */
     public function show($id)
     {
-        //
+        $bap = Bap::findOrFail($id);
+
+        return view('bap.show', compact('bap'));
     }
 
     /**
@@ -101,7 +105,15 @@ class BapController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this -> validate($request, [
+            'accepted' => 'required'
+        ]);
+
+        $bap = Bap::findOrFail($id);
+        $input = $request->input();
+        $bap->fill($input)->save();
+
+        return redirect() -> route('bap.index') -> with('success', 'Projet accepté');
     }
 
     /**
@@ -112,6 +124,9 @@ class BapController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $bap = Bap::findOrFail($id);
+        $bap->delete();
+
+        return redirect() -> route('bap.index') -> with('success', 'Projet refusé');
     }
 }

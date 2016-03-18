@@ -18,10 +18,10 @@
     <style>
         body {
             font-family: 'Lato';
-            background-image: url('../chaton.jpg');
+            background-image: url('../fond.jpeg');
             background-size: cover;
         }
-
+        
         .fa-btn {
             margin-right: 6px;
         }
@@ -41,7 +41,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}">
                     BAP IIM
                 </a>
             </div>
@@ -49,18 +49,28 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
                     <li><a href="{{ route('post.index') }}">Articles</a></li>
                     @if(Auth::check())
                     <li><a href="{{ route('post.create') }}">Rédiger un article</a></li>
                     @endif
-                    <li><a href="{{ route('contact.create') }}">Contact</a></li>
+                    
                     <li><a href="{{ route('bap.create') }}">BAP</a></li>
+                    <li><a href="{{ route('contact.create') }}">Contact</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
+                    @if (Auth::user()->isAdmin)
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ route('bap.index') }}">Gestion des projets</a></li>
+                            </ul>
+                        </li>
+                    @endif
+
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
