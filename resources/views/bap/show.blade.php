@@ -25,6 +25,7 @@
                     <strong>Email:</strong> {{ $bap->emailCON }} <br>
                     <strong>Téléphone:</strong> {{ $bap->telCON }}
                     </p>
+                    <h5>Fiche d'identité</h5>
                     <p>
                     <strong>Raison sociale, activité ...:</strong> {{ $bap->social }} <br>
                     <strong>Type de demande:</strong> {{ $bap->type }} <br>
@@ -57,10 +58,13 @@
                            '1' => 'Accepter',
                            '2' => 'Refuser']
                         ) !!}
-                    {!! Form::submit('Publier l\'article',
+                    {!! Form::submit('Valider',
                             ['class' => 'btn btn-primary'])
                     !!}
+
                     {!! Form::close() !!}
+
+                    <br>
 
                     {!! Form::model($bap, array(
                         'route' => array('bap.destroy', $bap->id),

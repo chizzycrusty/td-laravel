@@ -23,8 +23,26 @@
                             </p>
                         </div>
                         <div class="panel-footer">
-                            
 
+                            {!! Form::model($bap,
+                            array(
+                            'route' => array('bap.update', $bap->id),
+                            'method' => 'PUT'
+                            ))
+                            !!}
+                            {!! Form::select('accepted', [
+                                   '0' => 'En attente',
+                                   '1' => 'Accepter',
+                                   '2' => 'Refuser']
+                                ) !!}
+                            {!! Form::submit('Valider',
+                                    ['class' => 'btn btn-primary'])
+                            !!}
+
+                            {!! Form::close() !!}
+                            
+                            <br>
+        
                             {!! Form::model($bap, array(
                                 'route' => array('bap.destroy', $bap->id),
                                 'method' => 'DELETE')) 

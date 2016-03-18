@@ -113,7 +113,7 @@ class BapController extends Controller
         $input = $request->input();
         $bap->fill($input)->save();
 
-        return redirect() -> route('bap.index') -> with('success', 'Projet accepté');
+        return redirect() -> route('bap.index') -> with('success', 'Statut changé');
     }
 
     /**
