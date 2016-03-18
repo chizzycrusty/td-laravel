@@ -10,28 +10,8 @@
                     </div>
 
 
-                    {!! Form::open(array(
-                            'route' => 'bap.store',
-                            ))
-                        !!}
 
-                        
-
-
-
-
-
-
-
-
-
-
-
-
-                 
-
-
-                    {!! Form::close() !!}
+        
 
 
                            
@@ -89,7 +69,7 @@
 
                         <!-- INPUT ADRESSE POSTALE -->
                         <div class="form-group{{ $errors->has('adresseCHEF') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Code postal</label>
+                            <label class="col-md-4 control-label">Adresse postale</label>
 
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="adresseCHEF" value="{{ old('adresseCHEF') }}">
@@ -171,7 +151,7 @@
 
                         <!-- INPUT ADRESSE POSTALE -->
                         <div class="form-group{{ $errors->has('adresseCON') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Code postal</label>
+                            <label class="col-md-4 control-label">Adresse postale</label>
 
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="adresseCON" value="{{ old('adresseCON') }}">
@@ -308,7 +288,7 @@
 
                         <!-- INPUT CONTRAINTES -->
                         <div class="form-group{{ $errors->has('contraintes') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Contraintes particluières <br> et informations complémentaires</label>
+                            <label class="col-md-4 control-label">Contraintes particulières <br> et informations complémentaires</label>
 
                             <div class="col-md-6">
                                 <textarea rows="4" cols="65" name="contraintes"> </textarea>
@@ -328,7 +308,8 @@
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-paper-plane"></i>Soumettre
-                                    </button>
+                                </button>
+                                
                                     <a class="btn btn-default" href="{{ route('post.index') }}">Retour aux articles</a>
                                 
                             </div>
