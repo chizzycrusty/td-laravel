@@ -21,7 +21,7 @@
             background-image: url('../fond.jpeg');
             background-size: cover;
         }
-        
+
         .fa-btn {
             margin-right: 6px;
         }
@@ -61,7 +61,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    @if (Auth::user()->isAdmin)
+                    @if (Auth::check() && Auth::user()->isAdmin)
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></a>
 
