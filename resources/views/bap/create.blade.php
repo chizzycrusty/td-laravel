@@ -5,317 +5,164 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="col-md-12 text-center">
-                        <h1>Formulaire de BAP</h1>
-                    </div>
-
-
-
-        
-
-
-                           
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('store') }}">
-                        {!! csrf_field() !!}
-
-
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Nom du projet</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="name" value="{{ old('name') }}">
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                    <div class="panel-heading" style="text-align: center;"><h2>Soumettre un projet BAP</h2></div>
+                    <div class="panel-body">
+                        {!! Form::open(array(
+                            'route' => 'bap.store',
+                            'method' => 'POST'
+                            ))
+                        !!}
+                        
+                        <div class="form-group">
+                            {!! Form::label('name', 'Nom du projet') !!}
+                            {!! Form::text('name', '', 
+                                ['class' => 'form-control']) 
+                            !!}
                         </div>
 
-
-
-
-                        <div class="text-center"><h3>A propos du commanditaire</h3></div>
-                        <!-- INPUT PRÉNOM et NOM -->
-                        <div class="form-group{{ $errors->has('NomPrenomCHEF') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Nom et Prénom du commanditaire</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="NomPrenomCHEF" value="{{ old('NomPrenomCHEF') }}">
-
-                                @if ($errors->has('NomPrenomCHEF'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('NomPrenomCHEF') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <!-- INPUT PRÉNOM et NOM -->
-                        <div class="form-group{{ $errors->has('fonctionCHEF') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Fonction du commanditaire</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="fonctionCHEF" value="{{ old('fonctionCHEF') }}">
-
-                                @if ($errors->has('fonctionCHEF'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('fonctionCHEF') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <!-- INPUT ADRESSE POSTALE -->
-                        <div class="form-group{{ $errors->has('adresseCHEF') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Adresse postale</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="adresseCHEF" value="{{ old('adresseCHEF') }}">
-
-                                @if ($errors->has('adresseCHEF'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('adresseCHEF') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-                        <!-- INPUT EMAIL -->
-                        <div class="form-group{{ $errors->has('emailCHEF') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Email</label>
-
-                            <div class="col-md-6">
-                                <input type="emailCHEF" class="form-control" name="email" value="{{ old('emailCHEF') }}">
-
-                                @if ($errors->has('emailCHEF'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('emailCHEF') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <!-- INPUT TELEPHONE -->
-                        <div class="form-group{{ $errors->has('telCHEF') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Téléphone</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="telCHEF" value="{{ old('telCHEF') }}">
-
-                                @if ($errors->has('telCHEF'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('telCHEF') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-
-
-                                         <!-- A PROPOS DU CONTACT -->
-                        <div class="text-center"><h3>A propos du contact</h3></div>
-                        <!-- INPUT NOM PRENOM CONTACT -->
-                        <div class="form-group{{ $errors->has('NomPrenomCON') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Nom et Prénom du contact</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="NomPrenomCON" value="{{ old('NomPrenomCON') }}">
-
-                                @if ($errors->has('NomPrenomCON'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('NomPrenomCON') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <!-- INPUT FONCTION CONTACT -->
-                        <div class="form-group{{ $errors->has('fonctionCON') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Fonction du contact</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="fonctionCON" value="{{ old('fonctionCON') }}">
-
-                                @if ($errors->has('fonctionCON'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('fonctionCON') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-                        <!-- INPUT ADRESSE POSTALE -->
-                        <div class="form-group{{ $errors->has('adresseCON') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Adresse postale</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="adresseCON" value="{{ old('adresseCON') }}">
-
-                                @if ($errors->has('adresseCON'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('adresseCON') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-                        <!-- INPUT EMAIL -->
-                        <div class="form-group{{ $errors->has('emailCON') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Email</label>
-
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="emailCON" value="{{ old('emailCON') }}">
-
-                                @if ($errors->has('emailCON'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('emailCON') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <!-- INPUT TELEPHONE -->
-                        <div class="form-group{{ $errors->has('telCON') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Téléphone</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="telCON" value="{{ old('telCON') }}">
-
-                                @if ($errors->has('telCON'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('telCON') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-
-
-                                    <!-- VOTRE FICHE D'IDENTITÉ -->
-                        <div class="text-center"><h3>Votre fiche d'identité</h3></div>
-
-                        <!-- INPUT RAISON SOCIALE -->
-                        <div class="form-group{{ $errors->has('social') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Raison social, activité ...</label>
-
-                            <div class="col-md-6">
-                                <input type="textarea" class="form-control" name="social" value="{{ old('social') }}">
-
-                                @if ($errors->has('social'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('social') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <!-- INPUT TYPE DE PROJET -->
-                        <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label"> Type de demande </label>
-
-                            <div class="col-md-6">
-                                <input type= "radio" name="demande" value="site"> Site internet
-                                <input type= "radio" name="demande" value="3D"> 3D
-                                <input type= "radio" name="demande" value="2D"> Animation 2D
-                                <input type= "radio" name="demande" value="installation"> Installation Multimédia
-                                <br>
-                                <input type= "radio" name="demande" value="JV"> Jeux-Vidéo
-                                <input type= "radio" name="demande" value="DVD"> DVD
-                                <input type= "radio" name="demande" value="print"> Print
-                                <input type= "radio" name="demande" value="CD"> CD-ROM
-                                <input type= "radio" name="demande" value="evenement"> Evemement
-                                <input type= "radio" name="demande" value="autre"> Autre
-
-                                @if ($errors->has('type'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('type') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-                        <!-- INPUT RAISON DE LA DEMANDE -->
-                        <div class="form-group{{ $errors->has('raison') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Raison de la demande</label>
-
-                            <div class="col-md-6">
-                                <textarea rows="8" cols="65" name="raison"> </textarea>
-                                @if ($errors->has('raison'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('raison') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <!-- INPUT CONTEXTE DE LA DEMANDE -->
-                        <div class="form-group{{ $errors->has('contexte') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Contexte de la demande</label>
-
-                            <div class="col-md-6">
-                                <textarea rows="4" cols="65" name="contexte"> </textarea>
-                                @if ($errors->has('contexte'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('contexte') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-                        <!-- INPUT OBJECTIF DE LA DEMANDE -->
-                        <div class="form-group{{ $errors->has('objectif') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Objectifs de la demande</label>
-
-                            <div class="col-md-6">
-                                <textarea rows="4" cols="65" name="objectif"> </textarea>
-                                @if ($errors->has('objectif'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('objectif') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-                        <!-- INPUT CONTRAINTES -->
-                        <div class="form-group{{ $errors->has('contraintes') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Contraintes particulières <br> et informations complémentaires</label>
-
-                            <div class="col-md-6">
-                                <textarea rows="4" cols="65" name="contraintes"> </textarea>
-                                @if ($errors->has('contraintes'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('contraintes') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-
-
+                        <div class="panel-heading" style="text-align: center;"><h4>À propos du commanditaire</h4></div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-paper-plane"></i>Soumettre
-                                </button>
-                                
-                                    <a class="btn btn-default" href="{{ route('post.index') }}">Retour aux articles</a>
-                                
-                            </div>
+                            {!! Form::label('NomPrenomCHEF', 'Nom et Prénom du commanditaire') !!}
+                            {!! Form::text('NomPrenomCHEF', '', 
+                                ['class' => 'form-control']) 
+                            !!}
                         </div>
-                    </form>
 
+                        <div class="form-group">
+                            {!! Form::label('fonctionCHEF', 'Fonction du commanditaire') !!}
+                            {!! Form::text('fonctionCHEF', '', 
+                                ['class' => 'form-control']) 
+                            !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('adresseCHEF', 'Adresse postale') !!}
+                            {!! Form::text('adresseCHEF', '', 
+                                ['class' => 'form-control']) 
+                            !!}
+                        </div>
+                            
+                        <div class="form-group">
+                            {!! Form::label('emailCHEF', 'Email') !!}
+                            {!! Form::text('emailCHEF', '', 
+                                ['class' => 'form-control']) 
+                            !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('telCHEF', 'Téléphone') !!}
+                            {!! Form::text('telCHEF', '', 
+                                ['class' => 'form-control']) 
+                            !!}
+                        </div>
+
+                         <div class="panel-heading" style="text-align: center;"><h4>À propos du contact</h4></div>
+
+                        <div class="form-group">
+                            {!! Form::label('NomPrenomCON', 'Nom et Prénom du contact') !!}
+                            {!! Form::text('NomPrenomCON', '', 
+                                ['class' => 'form-control']) 
+                            !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('fonctionCON', 'Fonction du contact') !!}
+                            {!! Form::text('fonctionCON', '', 
+                                ['class' => 'form-control']) 
+                            !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('adresseCON', 'Adresse postale') !!}
+                            {!! Form::text('adresseCON', '', 
+                                ['class' => 'form-control']) 
+                            !!}
+                        </div>
+                            
+                        <div class="form-group">
+                            {!! Form::label('emailCON', 'Email') !!}
+                            {!! Form::text('emailCON', '', 
+                                ['class' => 'form-control']) 
+                            !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('telCON', 'Téléphone') !!}
+                            {!! Form::text('telCON', '', 
+                                ['class' => 'form-control']) 
+                            !!}
+                        </div>
+
+                        <div class="panel-heading" style="text-align: center;"><h4>Votre fiche d'identité</h4></div>
+
+                        <div class="form-group">
+                            {!! Form::label('social', 'Raison social, activité ...') !!}
+                            {!! Form::textarea('social', '', 
+                                ['class' => 'form-control']) 
+                            !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('type', 'Type de demande') !!} <br>
+                            {!! Form::label('type', 'Site Internet') !!}
+                            {!! Form::radio('type', 'site')!!}
+                            {!! Form::label('type', '3D') !!}
+                            {!! Form::radio('type', '3D')!!}
+                            {!! Form::label('type', 'Animation 2D') !!}
+                            {!! Form::radio('type', '2D')!!}
+                            {!! Form::label('type', 'Installation Multimédia') !!}
+                            {!! Form::radio('type', 'multimedia')!!}
+                            {!! Form::label('type', 'Jeux Vidéo') !!}
+                            {!! Form::radio('type', 'JV')!!}
+                            {!! Form::label('type', 'DVD') !!}
+                            {!! Form::radio('type', 'DVD')!!}
+                            {!! Form::label('type', 'Print') !!}
+                            {!! Form::radio('type', 'print')!!}
+                            {!! Form::label('type', 'CD ROM') !!}
+                            {!! Form::radio('type', 'CD')!!}
+                            {!! Form::label('type', 'Événement') !!}
+                            {!! Form::radio('type', 'evenement')!!}
+                            {!! Form::label('type', 'Autre') !!}
+                            {!! Form::radio('type', 'autre')!!}
+                        </div>
+                        
+                        <div class="form-group">
+                            {!! Form::label('raison', 'Raison de la demande') !!}
+                            {!! Form::textarea('raison', '', 
+                                ['class' => 'form-control']) 
+                            !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('contexte', 'Contexte de la demande') !!}
+                            {!! Form::textarea('contexte', '', 
+                                ['class' => 'form-control']) 
+                            !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('objectif', 'Objectifs de la demande') !!}
+                            {!! Form::textarea('objectif', '', 
+                                ['class' => 'form-control']) 
+                            !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('contraintes', 'Contraintes particulières et informations complémentaires') !!}
+                            {!! Form::textarea('contraintes', '', 
+                                ['class' => 'form-control']) 
+                            !!}
+                        </div>
+
+                        <div class="panel-footer">
+                        {!! Form::submit('Publier l\'article',
+                            ['class' => 'btn btn-primary'])
+                        !!}
+
+                        {!! Form::close() !!}
+                        <a class="btn btn-default" href="{{ route('post.index') }}">Retour aux articles</a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -48,7 +48,7 @@ class ContactController extends Controller
         $input = $request -> input();
         $contact -> fill($input) -> save();
 
-        return redirect() -> route('contact.create') -> with('success', 'Votre message a été envoyé');;
+        return redirect() -> route('contact.create') -> with('success', 'Votre message a été envoyé');
     }
 
     /**

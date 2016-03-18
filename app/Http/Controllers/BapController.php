@@ -9,7 +9,12 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 
 class BapController extends Controller
-{
+{   
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['edit']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +43,31 @@ class BapController extends Controller
      */
     public function store(Request $request)
     {
-       //
+       $this -> validate($request, [
+            'name' => 'required',
+            'NomPrenomCHEF' => 'required',
+            'fonctionCHEF' => 'required',
+            'adresseCHEF' => 'required',
+            'emailCHEF' => 'required',
+            'telCHEF' => 'required',
+            'NomPrenomCON' => 'required',
+            'fonctionCON' => 'required',
+            'adresseCON' => 'required',
+            'emailCON' => 'required',
+            'telCON' => 'required',
+            'social' => 'required',
+            'type' => 'required',
+            'raison' => 'required',
+            'contexte' => 'required',
+            'objectif' => 'required',
+            'contraintes' => 'required'
+        ]);
+
+        $bap = new Bap;
+        $input = $request -> input();
+        $bap -> fill($input) -> save();
+
+        return redirect() -> route('bap.create') -> with('success', 'Votre projet a été soumis');
     }
 
     /**
