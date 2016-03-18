@@ -55,6 +55,7 @@
                     <li><a href="{{ route('post.create') }}">Rédiger un article</a></li>
                     @endif
                     <li><a href="{{ route('contact.create') }}">Contact</a></li>
+                    <li><a href="{{ route('bap.create') }}">BAP</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
