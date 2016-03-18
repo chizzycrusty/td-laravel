@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +21,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('auth/users/edituser');
+        $user=Auth::user();
+        return view('auth/users.edit')->with(array("user"=>$user));
     }
 
     /**
@@ -82,10 +82,11 @@ class UserController extends Controller
     {
         $this -> validate($request, [
             'name' => 'required',
-            'mail' => 'required'
+            'email' => 'required',
+            'password' => 'required'
         ]);
 
-        $user = Auth::findOrFail($id);
+        $user = User::findOrFail($id);
         $input = $request->input();
         $user->fill($input)->save();
 
@@ -103,4 +104,3 @@ class UserController extends Controller
 
     }
 }
-

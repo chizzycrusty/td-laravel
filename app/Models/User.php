@@ -27,5 +27,10 @@ class User extends Authenticatable
     public function posts() {
         return $this->hasMany('App\Models\Posts');
     }
+
+        public function setPasswordAttribute($password)
+    {   
+        $this->attributes['password'] = bcrypt($password);
+    }
 }
 ini_set('xdebug.max_nesting_level', 200); 
