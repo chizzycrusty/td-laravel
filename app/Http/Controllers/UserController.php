@@ -87,7 +87,7 @@ class UserController extends Controller
         ]);
 
         $user = User::findOrFail($id);
-        $input = $request->input();
+        $input = $request->except('password');
         $user->fill($input)->save();
 
         return redirect() -> route('user.index') -> with('success', 'Votre profil a bien été modifié');

@@ -28,13 +28,12 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/home', 'HomeController@index');
 
-	Route::get('/', function() {
-    	return view('welcome');
-	});
+	Route::get('/', 'PostController@index');
+
 	Route::resource('/bap', 'BapController');
 
 	Route::resource('/user', 'UserController');
-	
+
 	Route::resource('/post', 'PostController');
 
 	Route::get('/admin', function() {
@@ -43,7 +42,34 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::resource('/comment', 'CommentController');
 
-	Route::resource('/contact', 'ContactController');
+Route::get('/message/create/{id}', ['as' => 'message.creates', 'uses' => 'MessageController@create']);
+
+	Route::resource('/message', 'MessageController');
+
+	Route::get('/tag/{tag}', [
+		'as' => 'post.tag',
+		'uses' => "PostController@tag"
+		]);
+
+	Route::get('/prix/{prix}', [
+		'as' => 'post.prix',
+		'uses' => "PostController@prix"
+		]);
+
+	Route::get('/region/{region}', [
+		'as' => 'post.region',
+		'uses' => "PostController@region"
+		]);
+
+
+	Route::get('/web', [
+		'as' => 'web.index',
+		'uses' => "PostController@web"
+		]);  
+
+	Route::get('/listeweb', [
+		'as' => 'web.liste',
+		'uses' => "PostController@listeweb"
+		]);  
 
 });
-

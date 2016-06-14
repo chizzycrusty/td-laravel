@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Input;
 
 class Post extends Model
 {
-    protected $fillable = ['title', 'content', 'user_id'];
+    protected $fillable = ['title', 'img', 'type', 'content', 'user_id', 'adresse', 'postal', 'lieu', 'region'];
 
     public function user() {
     	return $this->belongsTo('App\Models\User');

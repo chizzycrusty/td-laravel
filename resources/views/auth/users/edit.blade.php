@@ -11,10 +11,8 @@
                     @endforeach
                 </div>
             @endif
-            <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Modifier votre Profil</div>
-                    <div class="panel-body">
+                                    <div class="panel-body">
 
 
                             {!! Form::model($user,
@@ -43,7 +41,7 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('password', 'Mot de passe') !!}
+                            {!! Form::label('password', 'Confirmez votre mot de passe') !!}
                             {!! Form::password('password', old('Mot de passe'),
                                 ['class' => 'form-control',
                                 'placeholder' => 'Mot de passe'
@@ -51,19 +49,18 @@
                             !!}
                         </div>
 
-                    </div>
                     <div class="panel-footer">
                         {!! Form::submit('Modifier',
-                            ['class' => 'btn btn-primary'])
+                            [ 'class' => 'btn btn-primary btn btn-jsi'])
                         !!}
 
                         {!! Form::close() !!}
 
 
-                        <a class="btn btn-default" href="{{ route('post.index') }}">Retour aux articles</a>
+                        <a class="btn btn-default btn-modifier" href="{{ route('post.index') }}">Retour aux articles</a>
+                    </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
     </div>

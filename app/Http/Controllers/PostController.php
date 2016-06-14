@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PostController extends Controller
 {
@@ -22,9 +27,18 @@ class PostController extends Controller
      */
     public function index()
     {
-        $list = Post::orderBy('created_at', 'desc')->paginate(10);
+        $list = Post::orderBy('created_at', 'desc')->paginate(100);
 
         return view('posts.index', compact('list'));
+
+    }
+
+    public function addvotes()  {
+
+      // assume you have a clicks  field in your DB
+
+      $this->votes = $this->votes + 1;
+      $this->save();
 
     }
 
@@ -39,6 +53,12 @@ class PostController extends Controller
        // return view('posts.create');
     }
 
+    public function web()
+    {
+        return view('web');
+       // return view('posts.create');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -47,19 +67,49 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $this -> validate($request, [
-            'title' => 'required',
-            'content' => 'required'
-        ]);
-
+        // $this -> validate($request, [
+        //     'title' => 'required',
+        //     'content' => 'required',
+        //     'prix' => 'required',
+        //     'lieu' => 'required'
+        // ]);
         $post = new Post;
-        $input = $request -> input();
-        $input['user_id'] = Auth::user() -> id;
-        $post -> fill($input) -> save();
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->type = $request->type;
+        $post->adresse = $request->adresse;
+        $post->postal = $request->postal;
+        $post->lieu = $request->lieu;
+        $post->region = $request->region;
+        $post->user_id = Auth::user()->id;
 
-        return redirect() -> route('post.show');
+        // Image::make(Input::file('img'))->resize(300, 200)->save('/uploads');
+        $image = Input::file('img');
+            $filename  = time() . '.' . $image->getClientOriginalExtension();
+            $path = public_path('uploads/' . $filename);
+            Image::make($image->getRealPath())->save($path);
+            $post->img = 'uploads/'.$filename;
+
+        $post -> save();
+
+        return redirect() -> route('web.index') -> with('success', 'Votre article a bien été créé');
     }
 
+    public function message(Request $request)
+    {
+        $this -> validate($request, [
+            'user_id' => 'required',
+            'message' => 'required'
+        ]);
+
+        $post = new Message;
+        $input = $request -> input();
+        $input['user_id'] = Auth::user() -> id;
+        $input['destinataire'] = Auth::user() -> id;
+        $post -> fill($input) -> save();
+
+        return redirect() -> route('messages.index') -> with('success', 'Votre message a bien été envoyé');
+    }
     /**
      * Display the specified resource.
      *
@@ -94,14 +144,20 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this -> validate($request, [
-            'title' => 'required',
-            'content' => 'required'
-        ]);
-
         $post = Post::findOrFail($id);
-        $input = $request->input();
-        $post->fill($input)->save();
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->type = $request->content;
+        $post->adresse = $request->adresse;
+        $post->postal = $request->postal;
+        $post->lieu = $request->lieu;
+        $post->region = $request->region;
+        $post->user_id = Auth::user()->id;
+
+        // Image::make(Input::file('img'))->resize(300, 200)->save('/uploads');
+
+
+        $post -> save();
 
         return redirect() -> route('post.index') -> with('success', 'Votre article a bien été modifié');
     }
@@ -119,4 +175,18 @@ class PostController extends Controller
 
         return redirect() -> route('post.index') -> with('success', 'Votre article a bien été supprimé');
     }
+    public function tag($tag)
+    {
+        $posts = Post::where('type', $tag)->get();
+        //dump($posts);
+        return view('posts.tag') -> with(compact('posts')); 
+    }
+    public function region($region)
+    {
+        $posts = Post::where('region', $region)->get();
+        //dump($posts);
+        return view('posts.region') -> with(compact('posts')); 
+    }
+
+
 }
