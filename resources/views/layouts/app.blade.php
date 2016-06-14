@@ -81,8 +81,11 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out"></i> Se déconnecter</a></li>
+                                
+                                <li><a href="{{ route('post.create') }}">Poster un restaurant</a></li>
                                 <li><a href="{{ url('/user') }}"><i class="fa fa-user"></i> Mon profil</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out"></i> Se déconnecter</a></li>
+
                             </ul>
                         </li>
                     @endif

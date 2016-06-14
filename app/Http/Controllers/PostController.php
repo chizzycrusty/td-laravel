@@ -92,7 +92,7 @@ class PostController extends Controller
 
         $post -> save();
 
-        return redirect() -> route('web.index') -> with('success', 'Votre article a bien été créé');
+        return redirect() -> route('post.index') -> with('success', 'Votre article a bien été créé');
     }
 
     public function message(Request $request)
